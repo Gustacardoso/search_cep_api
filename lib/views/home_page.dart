@@ -23,54 +23,79 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Consulta CEP'),
+        title: Text('Consultar CEP'),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.0),
-        child: <Widget>[
-          _buildSearchCepTextField(),
-          _buildSearchCepButton(),
-          _buildResultForm()
-        ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            _buildSearchCepTextField(),
+            _buildSearchCepButton(),
+            _buildResultForm()
+          ],
+        ),
       ),
     );
   }
-}
 
-Widget _buildSearchCepTextField() {
-  return TextField(
-    autofocus: true,
-    keyboardType: TextInputType.number,
-    textInputAction: TextInputAction.done,
-    decoration: InputDecoration(labelText: 'CEP'),
-    controller: _searchCepController,
-    enabled: _enableField,
-  );
-}
+  Widget _buildSearchCepTextField() {
+    return TextField(
+      autofocus: true,
+      keyboardType: TextInputType.number,
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(labelText: 'Cep'),
+      controller: _searchCepController,
+      enabled: _enableFiest,
+    );
+  }
 
-Widget _buildSearchCepButton() {
-  return Padding(
-    padding: const EdgeInsets.only(top: 20.0),
-    child: RaisedButton(
-      onPressed: _searchCep,
-      child: _loading ? _circularLoading() : Text('Consiltar'),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-    ),
-  );
-}
+  Widget _buildSearchCepButton() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: RaisedButton(
+        onPressed: _searchCep,
+        child: _loading ? _circularLoading() : Text('Consultar'),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      ),
+    );
+  }
 
-void _searching(bool enable) {
-  setState(() {
-    _result = enable ? '' : _result;
-    _loading = enable;
-    _enableField = !enable;
-  });
-}
+  void _searching(bool enable) {
+    setState(() {
+      _result = enable ? '' : _result;
+      _loading = enable;
+      _enableFiest = !enable;
+    });
+  }
 
-Widget _circularLoading() {
-  return Container(
-    height: 15.0,
-    width: 15.0,
-    child: CircularProgressIndicator(),
-  );
+  Widget _circularLoading() {
+    return Container(
+      height: 15.0,
+      width: 15.0,
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  Future _searchCep() async {
+    _searching(true);
+
+    final cep = _searchCepController.text;
+
+    final resultCep = await ViaCepService.fetchCep(cep: cep);
+    print(resultCep.localidade); //exibindo somente a localidade no terminal
+
+    setState(() {
+      _result = resultCep.toJson();
+    });
+
+    _searching(false);
+  }
+
+  Widget _buildResultForm() {
+    return Container(
+      padding: EdgeInsets.only(top: 20.0),
+      child: Text(_result ?? ''),
+    );
+  }
 }

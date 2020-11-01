@@ -1,9 +1,5 @@
 import 'dart:convert';
 
-ResultCep ResultCepFromJson(String str) => ResultCep.fromJson(json.decode(str));
-
-String ResultCepToJson(ResultCep data) => json.encode(data.toJson());
-
 class ResultCep {
   ResultCep({
     this.cep,
@@ -29,7 +25,12 @@ class ResultCep {
   String ddd;
   String siafi;
 
-  factory ResultCep.fromJson(Map<String, dynamic> json) => ResultCep(
+  factory ResultCep.fromJson(String str) =>
+      ResultCep.fromJson(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory ResultCep.fromMap(Map<String, dynamic> json) => ResultCep(
         cep: json["cep"],
         logradouro: json["logradouro"],
         complemento: json["complemento"],
@@ -42,7 +43,7 @@ class ResultCep {
         siafi: json["siafi"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "cep": cep,
         "logradouro": logradouro,
         "complemento": complemento,
