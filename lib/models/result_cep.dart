@@ -1,11 +1,7 @@
-// To parse this JSON data, do
-//
-//     final welcome = welcomeFromMap(jsonString);
-
 import 'dart:convert';
 
-class Welcome {
-  Welcome({
+class ResultCep {
+  ResultCep({
     this.cep,
     this.logradouro,
     this.complemento,
@@ -29,11 +25,11 @@ class Welcome {
   String ddd;
   String siafi;
 
-  factory Welcome.fromJson(String str) => Welcome.fromMap(json.decode(str));
+  factory ResultCep.fromJson(String str) => ResultCep.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Welcome.fromMap(Map<String, dynamic> json) => Welcome(
+  factory ResultCep.fromMap(Map<String, dynamic> json) => ResultCep(
         cep: json["cep"],
         logradouro: json["logradouro"],
         complemento: json["complemento"],

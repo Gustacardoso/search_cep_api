@@ -23,7 +23,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Consultar CEP'),
+        title: Text(
+          'Consultar CEP',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.0),
@@ -55,8 +58,14 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.only(top: 20.0),
       child: RaisedButton(
         onPressed: _searchCep,
-        child: _loading ? _circularLoading() : Text('Consultar'),
+        child: _loading
+            ? _circularLoading()
+            : Text(
+                'Consultar',
+                style: TextStyle(color: Colors.white),
+              ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        color: Colors.yellow[600],
       ),
     );
   }
