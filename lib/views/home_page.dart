@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
     final cep = _searchCepController.text;
 
     final resultCep = await ViaCepService.fetchCep(cep: cep);
-    print(resultCep.localidade); //exibindo somente a localidade no terminal
+    // print(resultCep.localidade); //exibindo somente a localidade no terminal
 
     setState(() {
       _result = resultCep.toJson();
