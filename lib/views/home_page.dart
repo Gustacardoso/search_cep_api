@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:search_cep_api/services/via_cep_service.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,7 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var _searchCepController = TextEditingController();
+  var _searchCepController = new MaskedTextController(mask: '000.000.000-00');
   bool _loading = false;
   bool _enableFiest = true;
   String _result;
@@ -92,10 +93,11 @@ class _HomePageState extends State<HomePage> {
     final cep = _searchCepController.text;
 
     final resultCep = await ViaCepService.fetchCep(cep: cep);
-    // print(resultCep.localidade); //exibindo somente a localidade no terminal
+
+    print(resultCep.localidade); //exibindo somente a localidade no terminal
 
     setState(() {
-      _result = resultCep.toJson();
+      _result = resultCep.toMap().toString();
     });
 
     _searching(false);
