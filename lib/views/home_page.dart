@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var _searchCepController = new MaskedTextController(mask: '000.000.000-00');
+  var _searchCepController = new MaskedTextController(mask: '00000-000');
   bool _loading = false;
   bool _enableFiest = true;
   String _result;
