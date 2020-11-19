@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(
           'Consultar CEP',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black),
         ),
       ),
       body: SingleChildScrollView(
@@ -63,10 +63,10 @@ class _HomePageState extends State<HomePage> {
             ? _circularLoading()
             : Text(
                 'Consultar',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black),
               ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: Colors.yellow[600],
+        color: Colors.blue[600],
       ),
     );
   }

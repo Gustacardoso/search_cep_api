@@ -6,8 +6,8 @@ void main() {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
-      theme:
-          ThemeData(brightness: Brightness.light, primarySwatch: Colors.amber),
+      theme: ThemeData(
+          brightness: Brightness.light, primarySwatch: Colors.blue[900]),
       darkTheme: ThemeData(brightness: Brightness.dark),
     ),
   );
